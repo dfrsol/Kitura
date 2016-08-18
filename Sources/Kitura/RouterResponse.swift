@@ -106,15 +106,17 @@ public class RouterResponse {
             statusCode = .OK
         }
 
-        let content = lifecycle.writtenDataFilter(body: buffer.data)
-        let contentLength = headers["Content-Length"]
-        if  contentLength == nil {
-            headers["Content-Length"] = String(content.count)
-        }
-        addCookies()
+        if  let data = buffer.data {
+            let content = lifecycle.writtenDataFilter(body: data)
+            let contentLength = headers["Content-Length"]
+            if  contentLength == nil {
+                headers["Content-Length"] = String(content.length)
+            }
+            addCookies()
 
-        if  request.method != .head {
-            try response.write(from: content)
+            if  request.method != .head {
+                try response.write(from: content)
+            }
         }
         state.invokedEnd = true
         try response.end()
@@ -156,7 +158,7 @@ public class RouterResponse {
     /// - Parameter data: the data to send
     /// - Returns: this RouterResponse
     @discardableResult
-    public func send(data: Data) -> RouterResponse {
+    public func send(data: NSData) -> RouterResponse {
         buffer.append(data: data)
         state.invokedSend = true
         return self
@@ -171,7 +173,7 @@ public class RouterResponse {
     ///       If the fileName is relative, it is relative to the current directory.
     @discardableResult
     public func send(fileName: String) throws -> RouterResponse {
-        let data = try Data(contentsOf: URL(fileURLWithPath: fileName))
+        let data = try NSData(contentsOfFile: fileName, options: [])
 
         let contentType =  ContentType.sharedInstance.getContentType(forFileName: fileName)
         if  let contentType = contentType {
@@ -341,4 +343,4 @@ public class RouterResponse {
 public typealias LifecycleHandler = () -> Void
 
 /// Type alias for written data filter, i.e. pre-write lifecycle handler
-public typealias WrittenDataFilter = (body: Data) -> Data
+public typealias WrittenDataFilter = (body: NSData) -> NSData

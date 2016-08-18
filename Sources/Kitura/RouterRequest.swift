@@ -145,8 +145,8 @@ public class RouterRequest {
     ///
     /// - Throws:
     /// - Returns: the number of bytes read
-    public func read(into data: inout Data) throws -> Int {
-        return try serverRequest.read(into: &data)
+    public func read(into data: NSMutableData) throws -> Int {
+        return try serverRequest.read(into: data)
     }
 
     /// Read string

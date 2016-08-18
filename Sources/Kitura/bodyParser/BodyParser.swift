@@ -106,7 +106,7 @@ public class BodyParser: RouterMiddleware {
     private class func parse(_ message: RouterRequest, parser: BodyParserProtocol) -> ParsedBody? {
         do {
             let bodyData = try readBodyData(with: message)
-            return parser.parse(bodyData)
+            return parser.parse(Data._unconditionallyBridgeFromObjectiveC(bodyData))
         } catch {
             Log.error("failed to read body data, error = \(error)")
         }
@@ -118,12 +118,12 @@ public class BodyParser: RouterMiddleware {
     /// - Parameter with: the socket reader
     /// - Throws: ???
     /// - Returns: data for the body
-    public class func readBodyData(with reader: RouterRequest) throws -> Data {
-        var bodyData = Data()
+    public class func readBodyData(with reader: RouterRequest) throws -> NSMutableData {
+        let bodyData = NSMutableData()
 
-        var length = try reader.read(into: &bodyData)
+        var length = try reader.read(into: bodyData)
         while length != 0 {
-            length = try reader.read(into: &bodyData)
+            length = try reader.read(into: bodyData)
         }
         return bodyData
     }
@@ -137,3 +137,4 @@ extension Data {
         return self.subdata(in: 0 ..< data.count) == data
     }
 }
+

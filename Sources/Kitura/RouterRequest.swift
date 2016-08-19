@@ -86,7 +86,7 @@ public class RouterRequest {
 
         return subdomains.filter { !$0.isEmpty }
     }()
-    
+
     /// The HTTP version of the request
     public let httpVersion: HTTPVersion
 
@@ -198,7 +198,7 @@ private class Cookies {
 
     /// Storage of parsed Cookie headers
     private var cookies = [String: HTTPCookie]()
-    
+
     /// Static for Cookie header key value
     private let cookieHeader = "cookie"
 
@@ -210,12 +210,12 @@ private class Cookies {
             initCookie(cookie, cookies: &cookies)
         }
     }
-    
+
     private func initCookie(_ cookie: String, cookies: inout [String: HTTPCookie]) {
         let cookieNameValues = cookie.components(separatedBy: "; ")
-        for  cookieNameValue in cookieNameValues  {
+        for  cookieNameValue in cookieNameValues {
             let cookieNameValueParts = cookieNameValue.components(separatedBy: "=")
-            if   cookieNameValueParts.count == 2  {
+            if   cookieNameValueParts.count == 2 {
                 #if os(Linux)
                     let cookieName = cookieNameValueParts[0]
                     let cookieValue = cookieNameValueParts[1]

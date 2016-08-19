@@ -54,14 +54,13 @@ class RouterMiddlewareWalker {
                     // Purposefully capture self here
                     self.next()
                 }
-                
+
                 try middlewares[middlewareIndex].handle(request: request, response: response, next: closure)
-            }
-            catch {
+            } catch {
                 response.error = error
                 self.next()
             }
-            
+
         } else {
             callback()
         }

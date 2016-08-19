@@ -19,17 +19,17 @@ import KituraNet
 
 /// Headers
 public struct Headers {
-    
+
     /// The header storage
     internal var headers: HeadersContainer
-    
+
     /// Initialize a `Headers`
     ///
     /// - Parameter headers: the container for the headers
     init(headers: HeadersContainer) {
         self.headers = headers
     }
-    
+
     /// Append values to the header
     ///
     /// - Parameter key: the key
@@ -41,7 +41,7 @@ public struct Headers {
 
 /// Conformance to `Collection`
 extension Headers: Collection {
-    
+
     public var startIndex: HeadersIndex {
         return headers.startIndex
     }
@@ -49,14 +49,14 @@ extension Headers: Collection {
     public var endIndex: HeadersIndex {
         return headers.endIndex
     }
-    
+
     public typealias HeadersIndex = DictionaryIndex<String, [String]>
-    
+
     public subscript(key: String) -> String? {
         get {
             return headers[key]?.first
         }
-        
+
         set(newValue) {
             if let newValue = newValue {
                 headers[key] = [newValue]
@@ -65,14 +65,14 @@ extension Headers: Collection {
             }
         }
     }
-    
+
     public subscript(position: HeadersIndex) -> (String, String?) {
         get {
             let (key, value) = headers[position]
             return (key, value.first)
         }
     }
-    
+
     public func index(after i: HeadersIndex) -> HeadersIndex {
         return headers.index(after: i)
     }

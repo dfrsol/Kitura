@@ -19,9 +19,9 @@ import XCTest
 
 @testable import Kitura
 
-class TestContentType : XCTestCase {
+class TestContentType: XCTestCase {
 
-    static var allTests : [(String, (TestContentType) -> () throws -> Void)] {
+    static var allTests: [(String, (TestContentType) -> () throws -> Void)] {
         return [
             ("test_initialize", test_initialize),
             ("test_filename", test_filename),
@@ -51,7 +51,7 @@ class TestContentType : XCTestCase {
     func test_filename() {
 
         let contentType = ContentType.sharedInstance
-    
+
         var result = contentType.getContentType(forFileName: "foo.png")
         XCTAssertEqual(result, "image/png")
 

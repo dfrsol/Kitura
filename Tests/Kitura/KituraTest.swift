@@ -31,7 +31,7 @@ extension KituraTest {
     func doSetUp() {
         PrintLogger.use()
     }
-    
+
     func doTearDown() {
         // sleep(10)
     }
@@ -50,14 +50,14 @@ extension KituraTest {
         waitExpectation(timeout: 10) { error in
                 // blocks test until request completes
                 server.stop()
-                XCTAssertNil(error);
+                XCTAssertNil(error)
         }
     }
 
     func performRequest(_ method: String, path: String, callback: ClientRequest.Callback, headers: [String: String]? = nil, requestModifier: ((ClientRequest) -> Void)? = nil) {
         var allHeaders = [String: String]()
-        if  let headers = headers  {
-            for  (headerName, headerValue) in headers  {
+        if  let headers = headers {
+            for  (headerName, headerValue) in headers {
                 allHeaders[headerName] = headerValue
             }
         }

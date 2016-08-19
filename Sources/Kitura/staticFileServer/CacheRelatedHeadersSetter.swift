@@ -19,7 +19,7 @@ import Foundation
 
 extension StaticFileServer {
 
-    class CacheRelatedHeadersSetter : ResponseHeadersSetter {
+    class CacheRelatedHeadersSetter: ResponseHeadersSetter {
 
         /// Uses the file system's last modified value.
         private let addLastModifiedHeader: Bool
@@ -51,7 +51,7 @@ extension StaticFileServer {
                 }
             }
         }
-        
+
         private func addETag(response: RouterResponse,
                              fileAttributes: CustomResponseHeaderAttributes) {
             if generateETag {
@@ -70,7 +70,7 @@ extension StaticFileServer {
                 }
             }
         }
-        
+
         private func lastModifiedDate(fileAttributes: CustomResponseHeaderAttributes) -> Date? {
             #if os(Linux)
                 return fileAttributes[NSFileModificationDate] as? Date

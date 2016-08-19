@@ -41,7 +41,7 @@ public class RouterResponse {
         var onEndInvoked: LifecycleHandler = {}
 
         /// Current pre-write lifecycle handler
-        var writtenDataFilter: WrittenDataFilter =  { body in
+        var writtenDataFilter: WrittenDataFilter = { body in
             return body
         }
     }
@@ -65,7 +65,7 @@ public class RouterResponse {
 
     /// Set of cookies to return with the response
     public var cookies = [String: HTTPCookie]()
-    
+
     /// Optional error value
     public var error: Swift.Error?
 
@@ -131,7 +131,7 @@ public class RouterResponse {
                 cookieString += "; expires=" + SPIUtils.httpDate(expiresDate)
             }
 
-            if  cookie.isSecure  {
+            if  cookie.isSecure {
                 cookieString += "; secure; HTTPOnly"
             }
 
@@ -328,11 +328,9 @@ public class RouterResponse {
         if let acceptType = request.accepts(types: callbackTypes) {
             headers["Content-Type"] = acceptType
             callbacks[acceptType]!(request, self)
-        }
-        else if let defaultCallback = callbacks["default"] {
+        } else if let defaultCallback = callbacks["default"] {
             defaultCallback(request, self)
-        }
-        else {
+        } else {
             try status(.notAcceptable).end()
         }
     }

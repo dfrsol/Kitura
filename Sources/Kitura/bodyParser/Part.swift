@@ -21,7 +21,7 @@ public struct Part {
     public internal(set) var type = "text/plain"
     public internal(set) var headers = [HeaderType: String]()
     public internal(set) var body: ParsedBody = .raw(Data())
-    
+
     public enum HeaderType {
         case disposition, type, transferEncoding
     }

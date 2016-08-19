@@ -28,16 +28,16 @@ import XCTest
 #endif
 
 
-class TestErrors : XCTestCase {
+class TestErrors: XCTestCase {
 
-    static var allTests : [(String, (TestErrors) -> () throws -> Void)] {
+    static var allTests: [(String, (TestErrors) -> () throws -> Void)] {
         return [
             ("testInvalidMethod", testInvalidMethod),
             ("testInvalidEndpoint", testInvalidEndpoint),
             ("testInvalidHeader", testInvalidHeader)
         ]
     }
-    
+
     override func setUp() {
         doSetUp()
     }

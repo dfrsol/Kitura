@@ -48,5 +48,5 @@ public enum RouterMethod: String {
 
     init(fromRawValue: String) {
         self = RouterMethod(rawValue: fromRawValue) ?? .unknown
-    }    
+    }
 }

@@ -41,7 +41,7 @@ public class Kitura {
         httpServersAndPorts.append(server: server, port: port)
         return server
     }
-    
+
     /// Add a FastCGIServer on a port with a delegate.
     ///
     /// The server is only registered with the framework, it does not start listening
@@ -75,7 +75,7 @@ public class Kitura {
         }
         ListenerGroup.waitForListeners()
     }
-    
+
     typealias Port = Int
     private static var httpServersAndPorts = [(server: HTTPServer, port: Port)]()
     private static var fastCGIServersAndPorts = [(server: FastCGIServer, port: Port)]()
